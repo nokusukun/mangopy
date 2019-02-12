@@ -1,5 +1,6 @@
 from PIL import Image
 from PIL import GifImagePlugin
+from colorama import Fore
 import copy
 
 from src import driver as RenderDriver, layout, renderables, components
@@ -33,10 +34,23 @@ def test(gif):
     renderables.PositionFor(MainLayout, horizontal='center', vertical='center')(Player)
     Player.attachTo(MainLayout)
     size = Player.width - 2, Player.height - 2
-    
+
     def resolvePixel(pixelValue):
-      #return '█' if pixelValue > 213 else '▓' if pixelValue > 170 else '▒' if pixelValue > 128 else '░' if pixelValue > 64 else ' '
-      return '#' if pixelValue > 200 else ':' if pixelValue > 128 else "." if pixelValue > 64 else " "
+      #pixelMap = [
+      #  Fore.BLACK,
+      #  Fore.BLUE,
+      #  Fore.CYAN,
+      #  Fore.GREEN,
+      #  Fore.MAGENTA,
+      #  Fore.RED,
+      #  Fore.YELLOW,
+      #  Fore.WHITE
+      #]
+      #x = pixelMap[pixelValue] + '#' + Fore.RESET
+      #return x
+      return '█' if pixelValue > 213 else '▓' if pixelValue > 170 else '▒' if pixelValue > 128 else '░' if pixelValue > 64 else ' '
+      #return '#' if pixelValue > 200 else ':' if pixelValue > 128 else "⠂" if pixelValue > 64 else " "
+      #return '⣿' if pixelValue > 224 else '⢷' if pixelValue > 190 else '⢕' if pixelValue > 160 else '⢌' if pixelValue > 128 else '⡁' if pixelValue > 64 else '⠂' if pixelValue > 32 else ' '
 
     rendered_frames = [copy.deepcopy(Player.shadowBuff) for x in range(sequence.n_frames)]
     for i in range(sequence.n_frames):
@@ -53,6 +67,7 @@ def test(gif):
 
       sequence.seek(i)
       frame = sequence.convert('L').resize(size, Image.ANTIALIAS)
+      # frame = frame.quantize(colors=8)
       for width in range(0, frame.width):
         for height in range(0, frame.height):
           rendered_frames[i][height + 1][width + 1] = resolvePixel(frame.getpixel((width, height)))
@@ -83,6 +98,7 @@ def test(gif):
       #print(frame.width, frame.height)
       #frame.thumbnail(size, Image.ANTIALIAS)
       Player.shadowBuff = rendered_frames[i % sequence.n_frames]
+      #input()
 
       renderables.MoveToTop(MainLayout, statusWindow)
       MainLayout.draw()
@@ -90,4 +106,4 @@ def test(gif):
 
 
 if __name__ == '__main__':
-  test('aaa.gif')
+  test('nichiop.gif')

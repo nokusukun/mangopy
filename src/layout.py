@@ -98,12 +98,12 @@ class Layout:
 
     try: 
       anchorHeight, anchorWidth = self.anchorh, self.anchorw
-      buffer = np.asarray(self.shadowBuff)
-      parentBuffer = np.asarray(driver.shadowBuff)
+      buffer = np.asarray(self.shadowBuff, dtype=np.dtype('<U32'))
+
+      parentBuffer = np.asarray(driver.shadowBuff, dtype=np.dtype('<U32'))
       self.underData = parentBuffer[anchorHeight:anchorHeight +
                                     buffer.shape[0], anchorWidth:anchorWidth + buffer.shape[1]].tolist()
       parentBuffer[anchorHeight:anchorHeight + buffer.shape[0], anchorWidth:anchorWidth + buffer.shape[1]] = buffer
-
       driver.shadowBuff = parentBuffer.tolist()
     except ValueError:
       print(f'')

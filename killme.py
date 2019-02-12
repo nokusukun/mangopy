@@ -46,11 +46,11 @@ def test(gif):
         Fore.YELLOW,
         Fore.WHITE
       ]
-      x = pixelMap[pixelValue] + '#' + Fore.RESET
-      return x
+      #x = pixelMap[pixelValue] + '#' + Fore.RESET
+      #return x
       #return '█' if pixelValue > 213 else '▓' if pixelValue > 170 else '▒' if pixelValue > 128 else '░' if pixelValue > 64 else ' '
       #return '#' if pixelValue > 200 else ':' if pixelValue > 128 else "⠂" if pixelValue > 64 else " "
-      #return '⣿' if pixelValue > 224 else '⢷' if pixelValue > 190 else '⢕' if pixelValue > 160 else '⢌' if pixelValue > 128 else '⡁' if pixelValue > 64 else '⠂' if pixelValue > 32 else ' '
+      return '⣿' if pixelValue > 224 else '⢷' if pixelValue > 190 else '⢕' if pixelValue > 160 else '⢌' if pixelValue > 128 else '⡁' if pixelValue > 64 else '⠂' if pixelValue > 32 else ' '
 
     rendered_frames = [copy.deepcopy(Player.shadowBuff) for x in range(sequence.n_frames)]
     for i in range(sequence.n_frames):

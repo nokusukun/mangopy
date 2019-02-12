@@ -36,19 +36,19 @@ def test(gif):
     size = Player.width - 2, Player.height - 2
 
     def resolvePixel(pixelValue):
-      #pixelMap = [
-      #  Fore.BLACK,
-      #  Fore.BLUE,
-      #  Fore.CYAN,
-      #  Fore.GREEN,
-      #  Fore.MAGENTA,
-      #  Fore.RED,
-      #  Fore.YELLOW,
-      #  Fore.WHITE
-      #]
-      #x = pixelMap[pixelValue] + '#' + Fore.RESET
-      #return x
-      return '█' if pixelValue > 213 else '▓' if pixelValue > 170 else '▒' if pixelValue > 128 else '░' if pixelValue > 64 else ' '
+      pixelMap = [
+        Fore.BLACK,
+        Fore.BLUE,
+        Fore.CYAN,
+        Fore.GREEN,
+        Fore.MAGENTA,
+        Fore.RED,
+        Fore.YELLOW,
+        Fore.WHITE
+      ]
+      x = pixelMap[pixelValue] + '#' + Fore.RESET
+      return x
+      #return '█' if pixelValue > 213 else '▓' if pixelValue > 170 else '▒' if pixelValue > 128 else '░' if pixelValue > 64 else ' '
       #return '#' if pixelValue > 200 else ':' if pixelValue > 128 else "⠂" if pixelValue > 64 else " "
       #return '⣿' if pixelValue > 224 else '⢷' if pixelValue > 190 else '⢕' if pixelValue > 160 else '⢌' if pixelValue > 128 else '⡁' if pixelValue > 64 else '⠂' if pixelValue > 32 else ' '
 
@@ -67,7 +67,7 @@ def test(gif):
 
       sequence.seek(i)
       frame = sequence.convert('L').resize(size, Image.ANTIALIAS)
-      # frame = frame.quantize(colors=8)
+      frame = frame.quantize(colors=8)
       for width in range(0, frame.width):
         for height in range(0, frame.height):
           rendered_frames[i][height + 1][width + 1] = resolvePixel(frame.getpixel((width, height)))
